@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 from groq import Groq
 
 from skills.laptop import get_laptop_info
+from skills.scrapper import scrape_website, save_to_files
 
 load_dotenv()
 
@@ -31,7 +32,7 @@ while True:
     pertanyaan = input("Kamu: ")
 
     if pertanyaan.lower() == "exit":
-        print("AI: Oke brok, enjoy")
+        print("AI: Yaela udahan mulu")
         break
 
 # SKILL CEK LAPTOP
@@ -39,7 +40,7 @@ while True:
     if pertanyaan.lower() == "cek laptop":
         info = get_laptop_info()
 
-        print("\nNih info laptop lu:")
+        print("\nNih info laptop lau:")
         print("OS:", info["os"])
         print("CPU:", info["cpu"])
         print("RAM:", info["ram_used"], "/", info["ram_total"])
@@ -47,7 +48,34 @@ while True:
         print()
         continue
 
-# AI CHAT
+    # Scraping url
+    if pertanyaan.lower().startswith("scrape "):
+
+        url = pertanyaan[7:].strip()
+
+        try:
+
+            print("\nAI: Lagi scraping website...")
+
+            data = scrape_website(url)
+
+            csv_path, excel_path = save_to_files(data)
+
+            print("\nAI: Berhasil brok!")
+            print("Website :", data["title"])
+            print("Jumlah data :", len(data["data"]))
+
+            print("\nFile berhasil udah gua buat:")
+            print("CSV   :", csv_path)
+            print("Excel :", excel_path)
+
+        except Exception as e:
+
+            print("AI: Gagal scrape:", e)
+
+        continue
+
+    # AI CHAT
 
     messages.append({
         "role": "user",
