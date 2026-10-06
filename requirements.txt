@@ -1,2 +1,6 @@
 groq
 python-dotenv
+psutil
+pandas
+beautifulsoup4 
+requests
