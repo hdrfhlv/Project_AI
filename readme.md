@@ -8,3 +8,7 @@ My journey learning how to build AI Agents from scratch.
 - Environment variables
 - Conversation history
 - System prompt
+
+## Day 2
+- Menambahkan skill untuk mengecek spesifikasi laptop
+- menggunakan psutil
